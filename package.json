@@ -1,6 +1,6 @@
 {
   "name": "tgsend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "albertincx",
   "license": "MIT",
   "description": "Tgsend helps to send a message for all telegram bot users by part 800messages\nit creates send records from your users collection",
@@ -33,6 +33,6 @@
   },
   "dependencies": {
     "co": "^4.6.0",
-    "mongoose": "^8.8.4"
+    "mongoose": "^7.6.3"
   }
 }
