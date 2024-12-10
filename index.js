@@ -214,7 +214,7 @@ const startBroadcast = async (ctx, txtParam, botHelper) => {
             chat: ctx.message.chat
         }, false);
     }
-    await connBroad.close();
+    await connSend.close();
 
     try {
         return ctx.reply(`broad completed: ${resulStr} with ${breakProcess || ''} ${log}`);
