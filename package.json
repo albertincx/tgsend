@@ -1,0 +1,38 @@
+{
+  "name": "tgsend",
+  "version": "0.0.1",
+  "author": "albertincx",
+  "license": "MIT",
+  "description": "Tgsend helps to send a message for all telegram bot users by part 800messages\nit creates send records from your users collection",
+  "keywords": [
+    "percentage",
+    "percents"
+  ],
+  "main": "index.js",
+  "module": "index.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "test": "node test/test.js",
+    "test:watch": "node --watch test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertincx/tgsend.git"
+  },
+  "runkitExampleFilename": "runkit-example.js",
+  "bugs": {
+    "url": "https://github.com/albertincx/tgsend/issues"
+  },
+  "homepage": "https://github.com/albertincx/tgsend#readme",
+  "directories": {
+    "test": "test"
+  },
+  "funding": {
+    "type": "Only star here",
+    "url": "https://github.com/albertincx/tgsend"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "mongoose": "^8.8.4"
+  }
+}
