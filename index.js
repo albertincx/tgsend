@@ -74,14 +74,14 @@ const createBroadcast = async (ctx, txt, botHelper) => {
 
         if (updates.length % 1000 === 0) {
             console.log(`updates added ${updates.length}`);
-            await messages.bulkWrite(updates);
+            await messages.bulkWrite(updates, {ordered: false}).catch(e => console.log(e));
             updates = [];
         }
     }
 
     if (updates.length) {
         console.log(`updates added ${updates.length}`);
-        await messages.bulkWrite(updates);
+        await messages.bulkWrite(updates, {ordered: false}).catch(e => console.log(e));
     }
 
     const updFilter = {
