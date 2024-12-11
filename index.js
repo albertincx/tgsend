@@ -1,5 +1,4 @@
 const co = require('co');
-const mongoose = require('mongoose');
 
 const cBroad = '/createBroadcast';
 const sBroad = '/startBroadcast';
@@ -47,20 +46,15 @@ const getCmdParams = txt => {
     return params || [];
 };
 
-let schema = new mongoose.Schema({}, {
-    strict: false,
-    versionKey: false
-});
-
 const createBroadcast = async (ctx, txt, botHelper) => {
     const [cId] = getCmdParams(txt);
     if (!cId) return ctx.reply('broad err no id');
 
     const connSecond = botHelper.conn;
 
-    const model = connSecond.model('broadcasts', schema);
+    const model = connSecond.model('broadcasts');
 
-    const messages = connSecond.model('users', schema);
+    const messages = connSecond.model('users');
     let filter = {};
 
     const cursor = messages.find(filter).cursor();
@@ -72,7 +66,6 @@ const createBroadcast = async (ctx, txt, botHelper) => {
         updates.push({
             insertOne: {
                 document: {
-                    _id: new mongoose.Types.ObjectId(),
                     uid: id,
                     cId
                 }
@@ -114,7 +107,7 @@ const startBroadcast = async (ctx, txtParam, botHelper) => {
 
     const connSend = botHelper.connSend;
 
-    const model = connSend.model('broadcasts', schema);
+    const model = connSend.model('broadcasts');
 
     const filter = {
         sent: {$exists: false},

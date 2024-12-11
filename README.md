@@ -34,7 +34,7 @@ implemented https://github.com/albertincx/formatbot1
 
 IMPORTANT 
 
-you should implement getConf, toggleConfig, isAdmin, getMidMessage, forwardMes, sendAdmin methods
+you should implement toggleConfig, isAdmin, getMidMessage, forwardMes, sendAdmin methods
 
 
 ## TODO
