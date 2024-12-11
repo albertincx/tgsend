@@ -107,7 +107,7 @@ const startBroadcast = async (ctx, txtParam, botHelper) => {
 
     const connSend = botHelper.connSend;
 
-    const messages = connSend.model('broadcasts');
+    const messages = connSend.model('broadcasts', botHelper.schema);
 
     const filter = {
         sent: {$exists: false},
