@@ -52,12 +52,12 @@ const createBroadcast = async (ctx, txt, botHelper) => {
 
     const connSecond = botHelper.conn;
 
-    const model = connSecond.model('broadcasts');
+    const messages = connSecond.model('broadcasts', botHelper.schema);
 
-    const messages = connSecond.model('users');
+    const users = connSecond.model('users', botHelper.schema);
     let filter = {};
 
-    const cursor = messages.find(filter).cursor();
+    const cursor = users.find(filter).cursor();
 
     let updates = [], document;
 
@@ -74,21 +74,21 @@ const createBroadcast = async (ctx, txt, botHelper) => {
 
         if (updates.length % 1000 === 0) {
             console.log(`updates added ${updates.length}`);
-            await model.bulkWrite(updates);
+            await messages.bulkWrite(updates);
             updates = [];
         }
     }
 
     if (updates.length) {
         console.log(`updates added ${updates.length}`);
-        await model.bulkWrite(updates);
+        await messages.bulkWrite(updates);
     }
 
     const updFilter = {
         cId,
         sent: {$exists: false}
     };
-    const cnt = await model.countDocuments(updFilter);
+    const cnt = await messages.countDocuments(updFilter);
     ctx.reply(`broad ${cId} created: ${cnt}`);
 
     return connSecond.close();
@@ -107,14 +107,14 @@ const startBroadcast = async (ctx, txtParam, botHelper) => {
 
     const connSend = botHelper.connSend;
 
-    const model = connSend.model('broadcasts');
+    const messages = connSend.model('broadcasts');
 
     const filter = {
         sent: {$exists: false},
         cId,
     };
 
-    const cursor = model.find(filter)
+    const cursor = messages.find(filter)
         .limit(800)
         .cursor();
 
@@ -182,21 +182,21 @@ const startBroadcast = async (ctx, txtParam, botHelper) => {
             }
         }
         if (success.length) {
-            await model.bulkWrite(success);
+            await messages.bulkWrite(success);
         }
     });
 
     const resulStr = `${JSON.stringify(result)}`;
-    const cntSent = await model.countDocuments({
+    const cntSent = await messages.countDocuments({
         cId,
         sent: true
     });
-    const cntTotal = await model.countDocuments({cId});
+    const cntTotal = await messages.countDocuments({cId});
 
     let log = `${cntTotal}/${cntSent}`;
 
     if (cntTotal && cntTotal === cntSent) {
-        const cntActive = await model.countDocuments({
+        const cntActive = await messages.countDocuments({
             cId,
             error: {$exists: false}
         });
