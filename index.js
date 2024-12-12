@@ -3,7 +3,8 @@ const co = require('co');
 const cBroad = '/createBroadcast';
 const sBroad = '/startBroadcast';
 
-const logger = (r) => console.log(r);
+let log = false;
+const logger = (r) => log && console.log(r);
 
 const processRows = async (cc, limit = 25, timeout, cb) => {
     if (!cb) return;
@@ -225,6 +226,7 @@ const processBroadcast = async (txtParam, ctx, botHelper) => {
     if (txt.match(sBroad)) {
         txt = txt.replace(sBroad, '');
         ctx.reply('broad send started');
+        if (botHelper.log) log = true;
         await startBroadcast(ctx, txt, botHelper);
     }
     return Promise.resolve();

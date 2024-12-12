@@ -5,6 +5,9 @@ Description
 *Tgsend* helps to send a message for all telegram bot users by part 800messages
 it creates send records from your users collection
 
+Updates
+[Here](UPDATE.md)
+
 Install
 =======
 
@@ -47,3 +50,4 @@ you should implement schema, toggleConfig, isAdmin, getMidMessage, forwardMes, s
 # npm link
 
 https://www.npmjs.com/package/tgsend
+
